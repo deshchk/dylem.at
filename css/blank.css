@@ -1,0 +1,94 @@
+/* RESET */
+
+:root {
+  /* color-scheme: light dark; */
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 1rem;
+  cursor: default;
+  line-height: 1.5;
+  -moz-tab-size: 4;
+  tab-size: 4;
+  -webkit-tap-highlight-color: transparent;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+body {
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+#root {
+  isolation: isolate;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+textarea {
+  overflow: auto;
+  resize: vertical;
+}
+
+button {
+  border: 1px solid;
+  user-select: none;
+}
+
+nav ol,
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+small {
+  font-size: 80%;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+   scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

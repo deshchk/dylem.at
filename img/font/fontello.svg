@@ -1,0 +1,18 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2024 by original authors @ fontello.com</metadata>
+<defs>
+<font id="fontello" horiz-adv-x="1000" >
+<font-face font-family="fontello" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="star" unicode="&#xe800;" d="M929 489q0-12-15-27l-202-197 48-279q0-4 0-12 0-11-6-19t-17-9q-10 0-22 7l-251 132-250-132q-12-7-23-7-11 0-17 9t-6 19q0 4 1 12l48 279-203 197q-14 15-14 27 0 21 31 26l280 40 126 254q11 23 27 23t28-23l125-254 280-40q32-5 32-26z" horiz-adv-x="928.6" />
+
+<glyph glyph-name="star-half" unicode="&#xe801;" d="M464 832v-747l-250-132q-12-7-23-7-11 0-17 9t-6 19q0 4 1 12l48 279-203 197q-14 15-14 27 0 21 31 26l280 40 126 254q11 23 27 23z" horiz-adv-x="500" />
+
+<glyph glyph-name="star-1" unicode="&#xe802;" d="M2 460q11 37 101 37h225l69 207v1q19 56 44 75t49 0 43-75l1-1 68-207h226q58 0 85-17t14-47-59-63l-5-4-176-126 67-207 2-2q27-85-4-109t-105 29l-3 2-2 1-177 127-179-128-2-2q-73-52-105-29t-4 109l1 1v2l68 206-177 126-2 2-2 2q-73 52-61 90z" horiz-adv-x="931.2" />
+
+<glyph glyph-name="star-half-1" unicode="&#xf022;" d="M3 450q-12 30 16 47t87 18h233l70 213 0 2q15 43 33 66t39 21v-727l-186-135-3-2q-49-35-82-36t-40 29 10 89l1 1 0 1 70 214-182 130-2 2-3 1q-49 36-61 66z" horiz-adv-x="481" />
+</font>
+</defs>
+</svg>

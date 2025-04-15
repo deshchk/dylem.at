@@ -1,0 +1,39 @@
+{
+  "background_color": "#222222",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "dylem.at",
+  "orientation": "portrait",
+  "scope": "/",
+  "short_name": "dylem.at",
+  "start_url": "/",
+  "theme_color": "#222222",
+  "id": "dylem-at",
+  "description": "Psychologiczna aplikacja pozwalająca lepiej poznać siebie i ułatwiająca podejmowanie decyzji dotyczących własnej przyszłości.",
+  "lang": "pl",
+  "categories": [
+    "education",
+    "health",
+    "lifestyle",
+    "productivity",
+    "utilities"
+  ],
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "display_override": [
+    "window-controls-overlay",
+    "fullscreen",
+    "standalone",
+    "minimal-ui"
+  ]
+}

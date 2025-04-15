@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pl" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <link rel="icon" type="image/x-icon" href="./favicon.ico">
+  <link rel="manifest" href="./manifest.json">
+  <title>Mat na dylem.at</title>
+    <!-- Airtable -->
+      <script src="./js/airtable.js"></script>
+    <!-- chartist -->
+      <script type="module" src="./js/chartist.js"></script>
+    <!-- main js -->
+      <script type="module" src="app.js"></script>
+    <!-- drag and drop for touch devices by Bernardo Castilho -->
+      <script defer src="./js/ddropTouch.js"></script>
+    <!-- range input for touch devices by Sam Potts -->
+      <script defer src="./js/rangeTouch.js"></script>
+  <link rel="stylesheet" href="./css/blank.css">
+    <!-- chartist -->
+      <link rel="stylesheet" href="./css/chart.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div id="start-overlay">
+    <svg id="splash-logo" viewBox="0 0 212 212" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M 107.83167,0.385 94.388046,35.555463 c -6.12984,1.003827 -11.99902,2.783766 -17.49815,5.243607 -20.904855,9.351023 -36.46936,28.313151 -40.942208,51.388083 L 0.0243,105.91809 35.947688,119.64955 c 5.632625,29.14372 28.989021,51.86443 58.406768,56.70713 l 13.477214,35.25832 13.73094,-35.92339 c 27.62443,-6.09111 49.10147,-28.16941 54.50158,-56.04671 L 211.9757,105.91809 176.05231,92.187153 C 170.61328,64.367386 149.14636,42.3912 121.56261,36.308388 Z M 23.254923,21.65657 20.264925,36.903701 5.198144,40.389276 20.445276,43.336383 23.930851,58.403164 26.874857,43.172052 41.944738,39.713349 26.713627,36.726968 Z m 88.506737,23.857975 c 59.03826,-1.347417 39.96297,88.627665 26.46195,88.627665 -6.70457,0 -9.53853,-3.22244 -9.43973,-15.08952 V 92.318923 c 0,-11.87067 -8.73645,-22.576392 -28.28923,-21.861715 -12.051884,0.44051 -28.875237,14.520045 -28.875237,14.520045 0,0 16.655073,-38.926671 40.142247,-39.462708 z m -6.2792,37.981148 c 2.6276,0.13962 4.78593,1.14478 6.21409,3.17293 2.0211,3.16946 3.19245,8.79671 3.51399,16.881137 h -10.12858 c -10.473004,0 -18.236244,1.86042 -23.289004,5.58105 -5.00684,3.7207 -7.51014,9.09513 -7.51014,16.12305 0,5.74177 1.51587,10.08265 4.54753,13.02246 6.24192,5.9582 22.034974,6.51459 37.757894,-2.5492 13.96936,11.92512 25.8877,4.85847 27.41021,4.03438 -16.4446,35.12594 -57.422004,33.20373 -73.252369,14.22807 C 45.697486,123.96419 87.089146,82.518373 105.48246,83.495693 Z m -2.5368,27.908887 c 4.18001,0 8.26862,0.34451 12.26488,1.03353 v 4.06538 c 0,4.59344 -0.43673,7.96966 -1.30948,10.12858 -0.82683,2.11299 -2.57218,3.76664 -5.23637,4.96094 -2.61827,1.1943 -5.42048,1.7911 -8.4062,1.7911 -3.904414,0 -6.798354,-0.91851 -8.681634,-2.7559 -1.8833,-1.88331 -2.82464,-4.66219 -2.82464,-8.33696 0,-3.76663 1.05633,-6.52272 3.16932,-8.26823 2.11294,-1.74552 5.78762,-2.61844 11.024124,-2.61844 z m 82.71175,48.20842 -4.15014,21.16254 -20.9119,4.83743 21.16253,4.0907 4.83743,20.91087 4.08606,-21.13928 20.91655,-4.80074 -21.14031,-4.14496 z" />
+    </svg>
+  </div>
+
+  <div id="root" data-section="1">
+
+    <div id="help" data-show="0">
+      treść jakaś do tego help okna
+    </div>
+
+    <main class="flex-col">
+
+      <section id="about-me" class="main-section flex-col" data-show="0">
+        <h4 class="section-title bigger">Kim jesteś?</h4>
+        <div>
+          Identyfikuję się jako
+          <select name="gender" id="gender-select" class="about-me-input select">
+            <option value="1">kobieta</option>
+            <option value="2">mężczyzna</option>
+            <option value="0">osoba niebinarna</option>
+          </select>
+        </div>
+        <div>
+          W tekście
+          <select name="text-gender" id="text-gender-select" class="about-me-input select">
+            <option value="0">wolałabym</option>
+            <option value="1">wolałbym</option>
+          </select> czytać właśnie taką formę.
+        </div>
+        <div>
+          Mam
+          <input name="wiek" id="wiek" class="about-me-input" inputmode="numeric" pattern="[0-9]{2}"
+            title="Tylko dwucyfrowa liczba" aria-label="dwucyfrowa liczba" type="text" minlength="2" maxlength="2"
+            size="2" placeholder="18" autocomplete="off" />
+          lat.
+        </div>
+      </section>
+
+
+      <section id="voting-list-section" class="main-section flex-col" data-show="0">
+        <article id="instruction">
+          <h4 id="instruction-title" class="section-title bigger">Instrukcja</h4>
+          <p>
+            Do poniższej listy wpisz <strong>od 4 do 6 aktywności</strong>,
+            które są dla Ciebie w jakiś sposób <em>ważne</em> w życiu.
+          </p>
+          <p id="answer-example">
+            np. <b>pisanie opowiadań</b> czy <b>podróżowanie</b>
+          </p>
+        </article>
+
+        <div class="voting-list-block">
+          <div id="adding-option">
+            <input type="text" id="add-opt" placeholder="wpisywanie aktywności..." autocomplete="off">
+            <button id="add-opt-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20">
+                <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+              </svg>
+            </button>
+          </div>
+          <h4 id="list-title" class="section-title">Lista</h4>
+          <ul id="opt-list"></ul>
+        </div>
+      </section>
+
+      <section id="pre-voting-section" class="main-section flex-col" data-show="0">
+        <div id="pre-voting-instruction">
+          <p>Twoje aktywności stworzyły talię kart.</p>
+          <p>W następnym kroku zagrasz w pewnego rodzaju <i>wojnę</i>.</p>
+          <p>
+            Zobaczysz dwie wylosowane karty, lecz w porównaniu do oryginalnej <em>wojny</em> ich wartości nie są z góry ustalone.<br>
+            <i>Ustalasz je Ty</i>.
+          </p>
+          <p class="task">Twoim zadaniem będzie więc wybranie tej karty, która <b>dla Ciebie</b> ma większą wartość.</p>
+          <img src="./img/karty-example.webp" alt="dwie karty" id="karty-example">
+        </div>
+      </section>
+
+      <section id="voting-section" class="main-section flex-col" data-show="0">
+        <small id="voting-legend" class="section-legend">głosowanie</small>
+        <h2 id="voting-title" class="form-section-title">Co ma dla Ciebie większą wartość?</h2>
+        <div id="voters">
+          <small id="four-to-start">W poprzedniej liście muszą znaleźć się co najmniej 4 aktywności, aby móc przejśc
+            dalej.</small>
+          <button id="opt-a">...</button>
+          <button id="opt-b">...</button>
+          <div id="voters-post" hidden><h4>głosowanie zakończone</h4>można przejść dalej</div>
+        </div>
+      </section>
+
+
+      <section id="post-voting-section" class="main-section flex-col" data-show="0">
+        <h2 id="post-voting-title" class="form-section-title">Ile masz teraz czasu?</h2>
+        <div id="choice-block">
+          <input type="radio" name="choice" id="shorter-opt" value="0" disabled>
+          <label for="shorter-opt" id="shorter">
+            <h4 class="choice-label">Mniej</h4>
+
+            <div class="choice-opis">
+              <span><b>2</b> aktywności <br> <b>22</b> zmienne</span>
+              <span>Wskaże potencjalnie najlepszy wybór spośród dwóch o największej wartości</span>
+            </div>
+          </label>
+          </input>
+          <input type="radio" name="choice" id="longer-opt" value="1">
+          <label for="longer-opt" id="longer">
+            <h4 class="choice-label">Więcej</h4>
+
+            <div class="choice-opis">
+              <span></span>
+              <span>Poda najlepszy wybór, ranking aktywności i interpretację wyników</span>
+            </div>
+          </label>
+          </input>
+        </div>
+      </section>
+
+
+      <section id="main-form-section" class="main-section" data-show="0">
+        <div id="form-separator" data-show="0"></div>
+        <div id="form-fieldset">
+          <div id="activity-progress"></div>
+          <div id="activity-flex">
+            <h2 id="activity"></h2><h2 id="field-num"></h2>
+          </div>
+          <small id="field-legend" class="section-legend">satysfakcja</small>
+          <h4 id="form-section-pretitle"></h4>
+          <div id="field-inside" class="insides flex-col">masz wyłączony JavaScript w przeglądarce ziomku</div>
+        </div>
+      </section>
+
+      <section id="finish-section" class="main-section" data-show="0">
+        <h2>Twoje wyniki</h2>
+        <div id="wyniki">
+          <div id="w-pagination">
+            <button id="w-prev-btn" disabled>
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M8.29289 4.29289C8.68342 3.90237 9.31658 3.90237 9.70711 4.29289L16.7071 11.2929C17.0976 11.6834 17.0976 12.3166 16.7071 12.7071L9.70711 19.7071C9.31658 20.0976 8.68342 20.0976 8.29289 19.7071C7.90237 19.3166 7.90237 18.6834 8.29289 18.2929L14.5858 12L8.29289 5.70711C7.90237 5.31658 7.90237 4.68342 8.29289 4.29289Z"/>
+              </svg>
+            </button>
+              <h3 id="w-activity">aktywność</h3>
+            <button id="w-next-btn">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M8.29289 4.29289C8.68342 3.90237 9.31658 3.90237 9.70711 4.29289L16.7071 11.2929C17.0976 11.6834 17.0976 12.3166 16.7071 12.7071L9.70711 19.7071C9.31658 20.0976 8.68342 20.0976 8.29289 19.7071C7.90237 19.3166 7.90237 18.6834 8.29289 18.2929L14.5858 12L8.29289 5.70711C7.90237 5.31658 7.90237 4.68342 8.29289 4.29289Z"/>
+              </svg>
+            </button>
+          </div>
+
+          <div id="w-description">
+            <!-- Animated SVG Preloaders by SVGBackgrounds.com -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="64px" height="64px">
+              <circle fill="#fa8376" stroke="#fa8376" stroke-width="2" r="15" cx="40" cy="100">
+                <animate attributeName="opacity" calcMode="spline" dur="1" values="1;0;1;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="-.4"></animate>
+              </circle>
+              <circle fill="#dbaf00" stroke="#dbaf00" stroke-width="2" r="15" cx="100" cy="100">
+                <animate attributeName="opacity" calcMode="spline" dur="1" values="1;0;1;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="-.2"></animate>
+              </circle>
+              <circle fill="#349f59" stroke="#349f59" stroke-width="2" r="15" cx="160" cy="100">
+                <animate attributeName="opacity" calcMode="spline" dur="1" values="1;0;1;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="0"></animate>
+              </circle>
+            </svg>
+          </div>
+
+          <div id="w-linechart"></div>
+
+          <div id="w-scale-pagination">
+            <button id="w-prev-scale-btn" class="w-prev-btn" disabled>
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M8.29289 4.29289C8.68342 3.90237 9.31658 3.90237 9.70711 4.29289L16.7071 11.2929C17.0976 11.6834 17.0976 12.3166 16.7071 12.7071L9.70711 19.7071C9.31658 20.0976 8.68342 20.0976 8.29289 19.7071C7.90237 19.3166 7.90237 18.6834 8.29289 18.2929L14.5858 12L8.29289 5.70711C7.90237 5.31658 7.90237 4.68342 8.29289 4.29289Z"/>
+              </svg>
+            </button>
+              <div id="w-scale-and-info">
+                <h3 id="w-scale">🎉 satysfakcja</h3>
+                <div id="w-scale-info"></div>
+              </div>
+            <button id="w-next-scale-btn" class="w-next-btn">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M8.29289 4.29289C8.68342 3.90237 9.31658 3.90237 9.70711 4.29289L16.7071 11.2929C17.0976 11.6834 17.0976 12.3166 16.7071 12.7071L9.70711 19.7071C9.31658 20.0976 8.68342 20.0976 8.29289 19.7071C7.90237 19.3166 7.90237 18.6834 8.29289 18.2929L14.5858 12L8.29289 5.70711C7.90237 5.31658 7.90237 4.68342 8.29289 4.29289Z"/>
+              </svg>
+            </button>
+          </div>
+
+          <div id="w-differences"></div>
+
+          <div id="w-additional"></div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <a href="./" id="icon">
+        <svg viewBox="0 0 268 268" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M 68.520884,0 C 30.560623,0 0,30.560623 0,68.520884 V 199.33253 c 0,37.96025 30.560623,68.52037 68.520884,68.52037 H 199.33253 c 37.96025,0 68.52037,-30.56012 68.52037,-68.52037 V 68.520884 C 267.8529,30.560623 237.29278,0 199.33253,0 Z m 65.405826,28.393099 13.73094,35.923385 -0.12506,0.01861 c 27.58384,6.08283 49.16901,28.08527 54.60804,55.905106 l 0.007,-0.045 35.92339,13.73095 -35.91151,13.72681 c -5.40014,27.87739 -27.00367,49.93696 -54.62819,56.0281 l 0.12661,0.0186 -13.73094,35.92339 -13.47722,-35.25832 C 91.031924,199.522 67.680534,176.76684 62.047894,147.62303 l -0.0052,0.0346 -35.923388,-13.73146 35.923388,-13.73095 0.02429,0.16382 c 4.47286,-23.074986 20.013,-42.200836 40.917906,-51.551886 5.49916,-2.45985 11.36829,-4.23978 17.49816,-5.24361 z m 3.92999,45.129545 c -23.48724,0.53604 -40.142246,39.462706 -40.142246,39.462706 0,0 16.823316,-14.079536 28.875236,-14.520046 19.55284,-0.71468 28.28922,9.991016 28.28922,21.861716 v 26.73377 c -0.0988,11.86711 2.73514,15.08952 9.43974,15.08952 13.50105,0 32.57649,-89.975086 -26.46195,-88.627666 z m -6.27921,37.981136 c -18.39335,-0.97732 -59.785046,40.46842 -34.736376,70.49389 15.830416,18.97569 56.807716,20.89796 73.252376,-14.22807 -1.52251,0.82409 -13.44079,7.89077 -27.41021,-4.03438 -15.72295,9.06382 -31.51596,8.5074 -37.75791,2.5492 -3.03166,-2.93981 -4.54752,-7.28066 -4.54752,-13.02246 0,-7.02795 2.50329,-12.40235 7.51013,-16.12305 5.05279,-3.72066 12.81598,-5.58105 23.28902,-5.58105 h 10.12858 c -0.32154,-8.08446 -1.49289,-13.71168 -3.51399,-16.88114 -1.42816,-2.02815 -3.58647,-3.03332 -6.2141,-3.17294 z m -2.53679,27.9089 c -5.23654,0 -8.91116,0.87292 -11.02413,2.61844 -2.11299,1.74551 -3.16932,4.5016 -3.16932,8.26823 0,3.67477 0.94133,6.45365 2.82463,8.33696 1.88331,1.83739 4.77722,2.7559 8.68164,2.7559 2.98575,0 5.78794,-0.5968 8.40621,-1.7911 2.66419,-1.1943 4.40954,-2.84795 5.23637,-4.96094 0.87275,-2.15892 1.30948,-5.53514 1.30948,-10.12858 v -4.06539 c -3.99629,-0.68902 -8.08487,-1.03352 -12.26488,-1.03352 z" />
+        </svg>
+      </a>
+
+      <button id="theme-btn">
+        <svg id="l-theme" version="1.1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M8.23129 2.24048C9.24338 1.78695 10.1202 2.81145 9.80357 3.70098C8.72924 6.71928 9.38932 10.1474 11.6193 12.3765C13.8606 14.617 17.3114 15.2755 20.3395 14.1819C21.2206 13.8637 22.2173 14.7319 21.7817 15.7199C21.7688 15.7491 21.7558 15.7782 21.7427 15.8074C20.9674 17.5266 19.7272 19.1434 18.1227 20.2274C16.4125 21.3828 14.3957 22.0001 12.3316 22.0001H12.3306C9.93035 21.9975 7.6057 21.1603 5.75517 19.6321C3.90463 18.1039 2.64345 15.9797 2.18793 13.6237C1.73241 11.2677 2.11094 8.82672 3.2586 6.71917C4.34658 4.72121 6.17608 3.16858 8.20153 2.25386L8.23129 2.24048Z"></path>
+        </svg>
+        <svg id="d-theme" version="1.1" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <g>
+            <circle fill-rule="evenodd" clip-rule="evenodd" cx="32.003" cy="32.005" r="16.001"></circle>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.001,31.997c0-2.211-1.789-4-4-4H4c-2.211,0-4,1.789-4,4 s1.789,4,4,4h4C10.212,35.997,12.001,34.208,12.001,31.997z"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.204,46.139l-2.832,2.833c-1.563,1.562-1.563,4.094,0,5.656 c1.562,1.562,4.094,1.562,5.657,0l2.833-2.832c1.562-1.562,1.562-4.095,0-5.657C16.298,44.576,13.767,44.576,12.204,46.139z"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M32.003,51.999c-2.211,0-4,1.789-4,4V60c0,2.211,1.789,4,4,4 s4-1.789,4-4l-0.004-4.001C36.003,53.788,34.21,51.999,32.003,51.999z"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M51.798,46.143c-1.559-1.566-4.091-1.566-5.653-0.004 s-1.562,4.095,0,5.657l2.829,2.828c1.562,1.57,4.094,1.562,5.656,0s1.566-4.09,0-5.656L51.798,46.143z"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M60.006,27.997l-4.009,0.008 c-2.203-0.008-3.992,1.781-3.992,3.992c-0.008,2.211,1.789,4,3.992,4h4.001c2.219,0.008,4-1.789,4-4 C64.002,29.79,62.217,27.997,60.006,27.997z"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M51.798,17.859l2.828-2.829c1.574-1.566,1.562-4.094,0-5.657 c-1.559-1.567-4.09-1.567-5.652-0.004l-2.829,2.836c-1.562,1.555-1.562,4.086,0,5.649C47.699,19.426,50.239,19.418,51.798,17.859z"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M32.003,11.995c2.207,0.016,4-1.789,4-3.992v-4 c0-2.219-1.789-4-4-4c-2.211-0.008-4,1.781-4,3.993l0.008,4.008C28.003,10.206,29.792,11.995,32.003,11.995z"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.212,17.855c1.555,1.562,4.079,1.562,5.646-0.004 c1.574-1.551,1.566-4.09,0.008-5.649l-2.829-2.828c-1.57-1.571-4.094-1.559-5.657,0c-1.575,1.559-1.575,4.09-0.012,5.653 L12.212,17.855z"></path>
+        </svg>
+      </button>
+      <!-- <button id="help-btn">?</button> -->
+
+      <div id="change-pages">
+        <button id="previous-page" data-show="0">
+          <svg viewBox="0 -0.5 17 17" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M1.042,8.01 L7.347,1.317 C7.806,0.858 8.507,1.021 8.706,1.223 C9.108,1.626 9.048,2.221 8.645,2.625 L4.749,7.063 L16.064,7.065 C16.576,7.066 16.99,7.491 16.991,8.017 C16.992,8.542 16.576,8.968 16.064,8.967 L4.852,8.98 L8.706,13.251 C9.108,13.655 9.108,14.31 8.706,14.712 C8.306,15.117 7.756,15.016 7.354,14.611 L1.042,8.01 L1.042,8.01 Z" />
+          </svg>
+        </button>
+        <button id="next-page" data-show="0">dalej</button>
+        <button id="reset-btn" data-show="0">reset</button>
+      </div>
+    </footer>
+  </div>
+  <script>
+    if (typeof navigator.serviceWorker !== 'undefined') {
+      navigator.serviceWorker.register('sw.js')
+    }
+  </script>
+</body>
+
+</html>
